@@ -100,6 +100,27 @@ Modern AI models have increasingly large context windows, but manually uploading
 
 ---
 
+## What is the output format?
+
+The output file is a markdown file following this format : 
+
+```md
+<Project tree structure>
+
+---
+### File: <project_file_relative_path>
+---
+\`\`\`file_language
+<code>
+\`\`\`
+
+...
+```
+
+> LLMs are better at understanding a structured markdown file than other formats because they are frequently trained using Markdown.
+
+---
+
 ## License
 
 This project is licensed under the MIT License.
