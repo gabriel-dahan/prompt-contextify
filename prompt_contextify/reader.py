@@ -93,4 +93,6 @@ class Contextify(object):
 
     def write_output_file(self) -> None:
         with open(self.output_path, 'w') as f:
+            f.write(self.project_tree)
+            f.write('\n')
             f.write(self.get_files_markdown_string())
