@@ -9,11 +9,11 @@ class Contextify(object):
         self.path = Path(rel_path)
         self.output_path = Path(output_path)
         self.ignore_file_path = Path(ignore_file_path) if ignore_file_path else None
-        
+
         if isinstance(ignored_strings, str): 
             ignored_strings = [ignored_strings]
         self.ignored_strings = DEFAULT_IGNORED_STRINGS \
-                                .union(ignored_strings) \
+                                .union(set(ignored_strings)) \
                                 .union(self.__parse_ignore_file())
 
         self.project_tree = self.__get_project_tree(self.path, indent = ' ' * 8)

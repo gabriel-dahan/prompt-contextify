@@ -18,7 +18,7 @@ $$    $$/ $$    $$/ $$ |  $$ |  $$  $$/ $$       |/$$/ $$  |  $$  $$/ $$ |$$ |  
 
 A way to easily to share your project tree and content with LLMs !
 
-Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized text file, providing the AI with the full context it needs to understand, debug, or extend your project.
+Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized markdown file, providing the AI with the full context it needs to understand, debug, or extend your project.
 
 ---
 
@@ -77,6 +77,7 @@ contextify . --output project_context.txt
 
 * `--output, -o`: Specify the name of the resulting text file.
 * `--ignore, -i`: List directories or files to exclude from the scan.
+* `--ignore-file -if`: Specify a file listing patterns of files that should be excluded from the scan (example: .gitignore).
 * `--depth`: Limit how deep the tree and file scan should go.
 
 ---

@@ -41,8 +41,7 @@ def __get_command_args():
     parser.add_argument(
         "-i", "--ignore", 
         nargs = "+", 
-        default = [],
-        type = list[str], 
+        default = [], 
         help = "Additional directories or files to exclude."
     )
 
