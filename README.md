@@ -1,6 +1,6 @@
 # Contextify
 
-A new project making it easy to share with LLMs your project tree and content.
+A project making it easy to share your project tree and content with LLMs !
 
 Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized text file, providing the AI with the full context it needs to understand, debug, or extend your project.
 
