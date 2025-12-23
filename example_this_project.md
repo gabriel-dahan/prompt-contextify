@@ -1,4 +1,5 @@
 Project tree: 
+```
         ├── .gitignore
         ├── LICENSE
         ├── README.md
@@ -8,6 +9,7 @@ Project tree:
         │   ├── main.py
         │   └── reader.py
         └── pyproject.toml
+```
 
 ---
 ### File: .gitignore
