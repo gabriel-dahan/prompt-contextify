@@ -1,3 +1,13 @@
+Project tree:         ├── .gitignore
+        ├── LICENSE
+        ├── README.md
+        ├── example_this_project.md
+        ├── prompt_contextify/
+        │   ├── __init__.py
+        │   ├── main.py
+        │   └── reader.py
+        └── pyproject.toml
+
 ---
 ### File: .gitignore
 ---
@@ -46,7 +56,7 @@ $$    $$/ $$    $$/ $$ |  $$ |  $$  $$/ $$       |/$$/ $$  |  $$  $$/ $$ |$$ |  
 
 ---
 
-A project making it easy to share your project tree and content with LLMs !
+A way to easily to share your project tree and content with LLMs !
 
 Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized text file, providing the AI with the full context it needs to understand, debug, or extend your project.
 
@@ -59,19 +69,6 @@ Contextify is a command-line utility designed to bridge the gap between complex 
 * **Contextual Headers**: Each file is preceded by its relative path and position, helping the AI understand where the code lives within the architecture.
 * **Custom Filtering**: Support for ignoring specific folders (like `node_modules`, `.git`, or `dist`) and file types to keep the context clean and concise.
 * **LLM Optimized**: The output format is designed to be easily parsed by models like GPT-4, Claude, or Gemini.
-
----
-
-## Output Structure
-
-The generated file follows a consistent pattern to ensure maximum readability for the AI:
-
-1. **Project Metadata**: Project name and generation timestamp.
-2. **Directory Tree**: A visual map of the project.
-3. **File Modules**: For every file, Contextify provides:
-    * A clear separator.
-    * The full relative file path.
-    * The file content wrapped in appropriate Markdown code blocks.
 
 ---
 
@@ -154,195 +151,6 @@ The output file is a markdown file following this format :
 ## License
 
 This project is licensed under the MIT License.
-```
-
----
-### File: contextify.egg-info/PKG-INFO
----
-
-```text
-Metadata-Version: 2.4
-Name: contextify
-Version: 0.1.0
-Summary: A tool to flatten project context for LLMs
-Requires-Python: >=3.7
-Description-Content-Type: text/markdown
-License-File: LICENSE
-Dynamic: license-file
-
-
-```
-  ______                         __                            __      __   ______           
- /      \                       /  |                          /  |    /  | /      \          
-/$$$$$$  |  ______   _______   _$$ |_     ______   __    __  _$$ |_   $$/ /$$$$$$  |__    __ 
-$$ |  $$/  /      \ /       \ / $$   |   /      \ /  \  /  |/ $$   |  /  |$$ |_ $$//  |  /  |
-$$ |      /$$$$$$  |$$$$$$$  |$$$$$$/   /$$$$$$  |$$  \/$$/ $$$$$$/   $$ |$$   |   $$ |  $$ |
-$$ |   __ $$ |  $$ |$$ |  $$ |  $$ | __ $$    $$ | $$  $$<    $$ | __ $$ |$$$$/    $$ |  $$ |
-$$ \__/  |$$ \__$$ |$$ |  $$ |  $$ |/  |$$$$$$$$/  /$$$$  \   $$ |/  |$$ |$$ |     $$ \__$$ |
-$$    $$/ $$    $$/ $$ |  $$ |  $$  $$/ $$       |/$$/ $$  |  $$  $$/ $$ |$$ |     $$    $$ |
- $$$$$$/   $$$$$$/  $$/   $$/    $$$$/   $$$$$$$/ $$/   $$/    $$$$/  $$/ $$/       $$$$$$$ |
-                                                                                   /  \__$$ |
-                                                                                   $$    $$/ 
-                                                                                    $$$$$$/  
-```
-
----
-
-A project making it easy to share your project tree and content with LLMs !
-
-Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized text file, providing the AI with the full context it needs to understand, debug, or extend your project.
-
----
-
-## Key Features
-
-* **Tree Generation**: Automatically creates a visual representation of your project's directory structure at the top of the file.
-* **Recursive Aggregation**: Scans all subdirectories and appends file contents successively.
-* **Contextual Headers**: Each file is preceded by its relative path and position, helping the AI understand where the code lives within the architecture.
-* **Custom Filtering**: Support for ignoring specific folders (like `node_modules`, `.git`, or `dist`) and file types to keep the context clean and concise.
-* **LLM Optimized**: The output format is designed to be easily parsed by models like GPT-4, Claude, or Gemini.
-
----
-
-## Output Structure
-
-The generated file follows a consistent pattern to ensure maximum readability for the AI:
-
-1. **Project Metadata**: Project name and generation timestamp.
-2. **Directory Tree**: A visual map of the project.
-3. **File Modules**: For every file, Contextify provides:
-    * A clear separator.
-    * The full relative file path.
-    * The file content wrapped in appropriate Markdown code blocks.
-
----
-
-## Installation
-
-Create a python environment (depending on your OS and python installation) :
-
-```bash
-python -m venv .venv # (Windows)
-# or
-python<version> -m venv .venv # (Linux)
-```
-
-```bash
-source .venv/Scripts/activate # (Windows)
-# or 
-source .venv/bin/activate # (Linux)
-```
-
-Clone the repository and install dependencies : 
-
-```bash
-git clone https://github.com/gabriel-dahan/prompt-contextify.git
-cd prompt-contextify
-```
-
-```bash
-pip install -e .
-```
-
-You can now use the `contextify` command **inside of the virtual environment**.
-
-To install it globally, consider using a tool like [pipx](https://github.com/pypa/pipx).
-
----
-
-## Usage
-
-To generate a context file for your current directory:
-
-```bash
-contextify . --output project_context.txt
-```
-
-### Options
-
-* `--output, -o`: Specify the name of the resulting text file.
-* `--ignore, -i`: List directories or files to exclude from the scan.
-* `--depth`: Limit how deep the tree and file scan should go.
-
----
-
-## Why Contextify?
-
-Modern AI models have increasingly large context windows, but manually uploading dozens of files is tedious and error-prone. Contextify automates this process, ensuring that the AI "sees" the same structure you see in your IDE, leading to more accurate suggestions and better-informed code generation.
-
----
-
-## What is the output format?
-
-The output file is a markdown file following this format : 
-
-```md
-<Project tree structure>
-
----
-### File: <project_file_relative_path>
----
-\`\`\`file_language
-<code>
-\`\`\`
-
-...
-```
-
-> LLMs are better at understanding a structured markdown file than other formats because they are frequently trained using Markdown.
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
-```
-
----
-### File: contextify.egg-info/SOURCES.txt
----
-
-```txt
-LICENSE
-README.md
-pyproject.toml
-contextify.egg-info/PKG-INFO
-contextify.egg-info/SOURCES.txt
-contextify.egg-info/dependency_links.txt
-contextify.egg-info/entry_points.txt
-contextify.egg-info/top_level.txt
-prompt_contextify/__init__.py
-prompt_contextify/main.py
-prompt_contextify/reader.py
-```
-
----
-### File: contextify.egg-info/dependency_links.txt
----
-
-```txt
-
-
-```
-
----
-### File: contextify.egg-info/entry_points.txt
----
-
-```txt
-[console_scripts]
-contextify = prompt_contextify.main:main
-
-```
-
----
-### File: contextify.egg-info/top_level.txt
----
-
-```txt
-prompt_contextify
-
 ```
 
 ---
@@ -441,16 +249,15 @@ def __get_command_args():
 def main():
     print(CONTEXTIFY_COMMAND_TEXT)
 
-    project_path_raw, output, ignores, ignore_file, max_depth = __get_command_args()
-    project_path = Path(project_path_raw)
+    project_path, output_path, ignored, ignore_file, max_depth = __get_command_args()
 
-    output_path = Path(output)
+    project_path = Path(project_path)
 
-    context = Contextify(project_path, ignores, output_path)
+    context = Contextify(project_path, ignored, ignore_file, output_path)
 
     print(f'''
         Project path: {project_path.absolute()}
-        Output file: {output}
+        Output file: {output_path}
         Ignored matches: {', '.join(context.ignored_strings)}
         Max recursive depth: {max_depth}
     ''')
@@ -481,13 +288,16 @@ DEFAULT_IGNORED_STRINGS = {'.git', '.venv', '__pycache__', '.idea', '.vscode', '
 
 class Contextify(object):
 
-    def __init__(self, rel_path: str | Path, ignored_strings: list[str] | str, output_path: str | Path) -> None:
-        self.path = rel_path
-        self.output_path = output_path
+    def __init__(self, rel_path: str | Path, ignored_strings: list[str] | str, ignore_file_path: str | Path, output_path: str | Path) -> None:
+        self.path = Path(rel_path)
+        self.output_path = Path(output_path)
+        self.ignore_file_path = Path(ignore_file_path) if ignore_file_path else None
         
         if isinstance(ignored_strings, str): 
             ignored_strings = [ignored_strings]
-        self.ignored_strings = DEFAULT_IGNORED_STRINGS.union(ignored_strings)
+        self.ignored_strings = DEFAULT_IGNORED_STRINGS \
+                                .union(ignored_strings) \
+                                .union(self.__parse_ignore_file())
 
         self.project_tree = self.__get_project_tree(self.path, indent = ' ' * 8)
 
@@ -499,11 +309,19 @@ class Contextify(object):
         :return: Returns true if the file is kept, false otherwise.
         :rtype: bool
         """
+
         spec = pathspec.PathSpec.from_lines('gitwildmatch', patterns)
         
         return not spec.match_file(filename)
 
     def __allowed_items_in(self, items: list[str | Path], sort: bool = True) -> list[str | Path]: 
+        """
+        :param items: A list of file/folder paths.
+        :param sort: Whether to sort the output list or not (default: True).
+        :return: Returns a list of file/folder paths matching the allowed file names.
+        :rtype: list[str | Path]
+        """
+
         filtered_items = [it for it in items if self.__is_file_allowed(it.name, self.ignored_strings)]
 
         return sorted(filtered_items) if sort else filtered_items
@@ -515,6 +333,7 @@ class Contextify(object):
         :return: Returns a clean project tree.
         :rtype: str
         """
+
         tree_str = ""
         
         items = self.__allowed_items_in(current_path.iterdir())
@@ -523,7 +342,7 @@ class Contextify(object):
             is_last = (i == len(items) - 1)
             connector = "└── " if is_last else "├── "
             
-            tree_str += f"{indent}{connector}{item.name}\n"
+            tree_str += f"{indent}{connector}{item.name}{'/' if item.is_dir() else ''}\n"
             
             if item.is_dir():
                 extension = "    " if is_last else "│   "
@@ -531,9 +350,24 @@ class Contextify(object):
                 
         return tree_str
     
+    def __parse_ignore_file(self) -> set[str]:
+        if(not self.ignore_file_path):
+            return {}
+        
+        with open(self.ignore_file_path, 'r') as f:
+            lines = f.readlines()
+
+        lines = [l.strip() for l in lines if not (l.strip().startswith('#') or l.strip() == '')]
+
+        return set(lines)
     
     def get_files_markdown_string(self) -> str:
-        def get_files_markdown_string_rec(current_path: Path) -> str:
+        """
+        :return: Returns a formatted string containing the file names, content, etc. (see README).
+        :rtype: str
+        """
+
+        def get_files_markdown_string_rec(current_path: str | Path) -> str:
             full_string = ''
             
             current_path = Path(current_path)
@@ -569,6 +403,9 @@ class Contextify(object):
 
     def write_output_file(self) -> None:
         with open(self.output_path, 'w') as f:
+            f.write('Project tree: ')
+            f.write(self.project_tree)
+            f.write('\n')
             f.write(self.get_files_markdown_string())
 ```
 

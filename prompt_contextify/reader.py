@@ -5,13 +5,16 @@ DEFAULT_IGNORED_STRINGS = {'.git', '.venv', '__pycache__', '.idea', '.vscode', '
 
 class Contextify(object):
 
-    def __init__(self, rel_path: str | Path, ignored_strings: list[str] | str, output_path: str | Path) -> None:
-        self.path = rel_path
-        self.output_path = output_path
+    def __init__(self, rel_path: str | Path, ignored_strings: list[str] | str, ignore_file_path: str | Path, output_path: str | Path) -> None:
+        self.path = Path(rel_path)
+        self.output_path = Path(output_path)
+        self.ignore_file_path = Path(ignore_file_path) if ignore_file_path else None
         
         if isinstance(ignored_strings, str): 
             ignored_strings = [ignored_strings]
-        self.ignored_strings = DEFAULT_IGNORED_STRINGS.union(ignored_strings)
+        self.ignored_strings = DEFAULT_IGNORED_STRINGS \
+                                .union(ignored_strings) \
+                                .union(self.__parse_ignore_file())
 
         self.project_tree = self.__get_project_tree(self.path, indent = ' ' * 8)
 
@@ -23,11 +26,19 @@ class Contextify(object):
         :return: Returns true if the file is kept, false otherwise.
         :rtype: bool
         """
+
         spec = pathspec.PathSpec.from_lines('gitwildmatch', patterns)
         
         return not spec.match_file(filename)
 
     def __allowed_items_in(self, items: list[str | Path], sort: bool = True) -> list[str | Path]: 
+        """
+        :param items: A list of file/folder paths.
+        :param sort: Whether to sort the output list or not (default: True).
+        :return: Returns a list of file/folder paths matching the allowed file names.
+        :rtype: list[str | Path]
+        """
+
         filtered_items = [it for it in items if self.__is_file_allowed(it.name, self.ignored_strings)]
 
         return sorted(filtered_items) if sort else filtered_items
@@ -39,6 +50,7 @@ class Contextify(object):
         :return: Returns a clean project tree.
         :rtype: str
         """
+
         tree_str = ""
         
         items = self.__allowed_items_in(current_path.iterdir())
@@ -47,7 +59,7 @@ class Contextify(object):
             is_last = (i == len(items) - 1)
             connector = "└── " if is_last else "├── "
             
-            tree_str += f"{indent}{connector}{item.name}\n"
+            tree_str += f"{indent}{connector}{item.name}{'/' if item.is_dir() else ''}\n"
             
             if item.is_dir():
                 extension = "    " if is_last else "│   "
@@ -55,9 +67,24 @@ class Contextify(object):
                 
         return tree_str
     
+    def __parse_ignore_file(self) -> set[str]:
+        if(not self.ignore_file_path):
+            return {}
+        
+        with open(self.ignore_file_path, 'r') as f:
+            lines = f.readlines()
+
+        lines = [l.strip() for l in lines if not (l.strip().startswith('#') or l.strip() == '')]
+
+        return set(lines)
     
     def get_files_markdown_string(self) -> str:
-        def get_files_markdown_string_rec(current_path: Path) -> str:
+        """
+        :return: Returns a formatted string containing the file names, content, etc. (see README).
+        :rtype: str
+        """
+
+        def get_files_markdown_string_rec(current_path: str | Path) -> str:
             full_string = ''
             
             current_path = Path(current_path)
@@ -93,6 +120,7 @@ class Contextify(object):
 
     def write_output_file(self) -> None:
         with open(self.output_path, 'w') as f:
+            f.write('Project tree: ')
             f.write(self.project_tree)
             f.write('\n')
             f.write(self.get_files_markdown_string())

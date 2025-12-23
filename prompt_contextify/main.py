@@ -73,16 +73,15 @@ def __get_command_args():
 def main():
     print(CONTEXTIFY_COMMAND_TEXT)
 
-    project_path_raw, output, ignores, ignore_file, max_depth = __get_command_args()
-    project_path = Path(project_path_raw)
+    project_path, output_path, ignored, ignore_file, max_depth = __get_command_args()
 
-    output_path = Path(output)
+    project_path = Path(project_path)
 
-    context = Contextify(project_path, ignores, output_path)
+    context = Contextify(project_path, ignored, ignore_file, output_path)
 
     print(f'''
         Project path: {project_path.absolute()}
-        Output file: {output}
+        Output file: {output_path}
         Ignored matches: {', '.join(context.ignored_strings)}
         Max recursive depth: {max_depth}
     ''')
