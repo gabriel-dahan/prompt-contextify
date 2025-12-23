@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel", "pathlib"]
+requires = ["setuptools", "wheel", "pathlib", "pathspec"]
 build-backend = "setuptools.build_meta"
 
 [project]

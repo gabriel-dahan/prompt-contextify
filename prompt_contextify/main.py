@@ -1,7 +1,7 @@
 from pathlib import Path
 import argparse
 
-from . import ProjectReader
+from . import Contextify
 
 CONTEXTIFY_COMMAND_TEXT = '''
 
@@ -76,21 +76,26 @@ def main():
     project_path_raw, output, ignores, ignore_file, max_depth = __get_command_args()
     project_path = Path(project_path_raw)
 
-    pr = ProjectReader(project_path, ignores)
+    output_path = Path(output)
+
+    context = Contextify(project_path, ignores, output_path)
 
     print(f'''
         Project path: {project_path.absolute()}
         Output file: {output}
-        Ignored matches: {', '.join(pr.ignored_strings)}
+        Ignored matches: {', '.join(context.ignored_strings)}
         Max recursive depth: {max_depth}
     ''')
 
     print(f'''
         Clear project tree: 
           
-{pr.project_tree_list}
+{context.project_tree}
     ''')
 
+    # Output file generation
+    context.write_output_file()
+    print(f'     Output file was generated at {output_path}.')
 
 if __name__ == '__main__':
     print('Wrong way of running Contextify, consider reading README.md.')
