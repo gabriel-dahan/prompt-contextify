@@ -16,7 +16,7 @@ $$    $$/ $$    $$/ $$ |  $$ |  $$  $$/ $$       |/$$/ $$  |  $$  $$/ $$ |$$ |  
 
 ---
 
-A project making it easy to share your project tree and content with LLMs !
+A way to easily to share your project tree and content with LLMs !
 
 Contextify is a command-line utility designed to bridge the gap between complex local development environments and Large Language Models (LLMs). It flattens your entire directory structure and file contents into a single, well-organized text file, providing the AI with the full context it needs to understand, debug, or extend your project.
 
@@ -29,19 +29,6 @@ Contextify is a command-line utility designed to bridge the gap between complex 
 * **Contextual Headers**: Each file is preceded by its relative path and position, helping the AI understand where the code lives within the architecture.
 * **Custom Filtering**: Support for ignoring specific folders (like `node_modules`, `.git`, or `dist`) and file types to keep the context clean and concise.
 * **LLM Optimized**: The output format is designed to be easily parsed by models like GPT-4, Claude, or Gemini.
-
----
-
-## Output Structure
-
-The generated file follows a consistent pattern to ensure maximum readability for the AI:
-
-1. **Project Metadata**: Project name and generation timestamp.
-2. **Directory Tree**: A visual map of the project.
-3. **File Modules**: For every file, Contextify provides:
-    * A clear separator.
-    * The full relative file path.
-    * The file content wrapped in appropriate Markdown code blocks.
 
 ---
 
