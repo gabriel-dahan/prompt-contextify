@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contextify"
+version = "0.1.0"
+description = "A tool to flatten project context for LLMs"
+readme = "README.md"
+requires-python = ">=3.7"
+
+[project.scripts]
+# This line creates the "contextify" command
+# Syntax: command_name = "package_name.module:function_name"
+contextify = "prompt-contextify.main:main"
