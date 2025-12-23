@@ -1,4 +1,5 @@
-Project tree:         ├── .gitignore
+Project tree: 
+        ├── .gitignore
         ├── LICENSE
         ├── README.md
         ├── example_this_project.md
@@ -250,7 +251,6 @@ def main():
     print(CONTEXTIFY_COMMAND_TEXT)
 
     project_path, output_path, ignored, ignore_file, max_depth = __get_command_args()
-
     project_path = Path(project_path)
 
     context = Contextify(project_path, ignored, ignore_file, output_path)
@@ -403,7 +403,7 @@ class Contextify(object):
 
     def write_output_file(self) -> None:
         with open(self.output_path, 'w') as f:
-            f.write('Project tree: ')
+            f.write('Project tree: \n')
             f.write(self.project_tree)
             f.write('\n')
             f.write(self.get_files_markdown_string())
@@ -420,7 +420,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "contextify"
-version = "0.1.0"
+version = "1.1"
 description = "A tool to flatten project context for LLMs"
 readme = "README.md"
 requires-python = ">=3.7"

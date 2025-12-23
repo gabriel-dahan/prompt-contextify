@@ -74,7 +74,6 @@ def main():
     print(CONTEXTIFY_COMMAND_TEXT)
 
     project_path, output_path, ignored, ignore_file, max_depth = __get_command_args()
-
     project_path = Path(project_path)
 
     context = Contextify(project_path, ignored, ignore_file, output_path)
